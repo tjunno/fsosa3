@@ -5,11 +5,7 @@ const url = 'mongodb://@ds233748.mlab.com:33748/taysistakki'
 
 mongoose.connect(url)
 
-const Note = mongoose.model('Note', {
-  content: String,
-  date: Date,
-  important: Boolean
-})
+mongoose.Promise = global.Promise;
 
 const note = new Note({
   content: 'HTML on helppoa',

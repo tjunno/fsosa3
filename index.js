@@ -13,30 +13,30 @@ app.use(morgan(':method :url :type :status :res[content-length] - :response-time
 
 
 {
-let persons = [
+  let persons = [
     {
       id: 1,
       name: 'Arto Hellas',
       number: '040-123456'
-      
+
     },
     {
       id: 2,
       name: 'Martti Tienari',
       number: '040-123456'
-      
+
     },
     {
       id: 3,
       name: 'Arto Järvinen',
       number: '040-123456'
-      
+
     },
     {
       id: 4,
       name: 'Lea Kutvonen',
       number: '040-123456'
-      
+
     }
   ]
 
@@ -45,7 +45,7 @@ let persons = [
   })
 
   app.get('/info', (request, response) => {
-    response.send(`puhelinluettelossa on  ${persons.length} henkilön tiedot <br> <br> ${new Date()}`)
+    response.send(`puhelinluettelossa on ${persons.length} henkilön tiedot <br><br> ${new Date()}`)
   })
 
   app.get('/api/persons/:id', (request, response) => {
@@ -63,7 +63,7 @@ let persons = [
 
   app.post('/api/persons', (request, response) => {
     const body = request.body
-  
+
     if (body.name === undefined) {
       return response.status(400).json({ error: 'name missing' })
     }
@@ -73,31 +73,31 @@ let persons = [
     }
 
     if (persons.find(person => person.name === body.name)){
-      return response.status(400).json({ error : 'name already exists'})
+      return response.status(400).json({ error : 'name already exists' })
     }
-  
+
     const person = {
       name: body.name,
       number: body.number,
       id: generateId()
     }
-  
+
     persons = persons.concat(person)
-  
+
     response.json(person)
   })
 
   app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(note => note.id !== id)
-  
+
     response.status(204).end()
   })
 
   const error = (request, response) => {
-    response.status(404).send({error: 'unknown endpoint'})
+    response.status(404).send({ error: 'unknown endpoint' })
   }
-  
+
   app.use(error)
   const PORT = process.env.PORT || 3001
   app.listen(PORT, () => {
