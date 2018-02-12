@@ -1,2 +1,2 @@
 # fsosa3
-[appi](bscure-citadel-69236.herokuapp.com)
+[appi](https://obscure-citadel-69236.herokuapp.com/)
